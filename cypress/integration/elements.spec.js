@@ -71,4 +71,16 @@ describe('Work with basic elements', () => {
         .should('be.checked');
   });
 
+  it.only('Combo / Select', () => {
+    cy.get('[data-test=dataEscolaridade]')
+      .select('2o grau completo')
+      .should('have.value', '2graucomp')
+  });
+
+  it.only('Combos / Multi Selects ', () => {
+    cy.get('[data-testid=dataEsportes]')
+      .select(['nada', 'natacao', 'Corrida'])
+  });
+
+
 });
