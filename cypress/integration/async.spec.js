@@ -27,6 +27,7 @@ describe('Async', () => {
 
   it.only('Find', () => {
     cy.get('#buttonList').click();
+    //FORMA ERRADA, NÃO VAI FUNCIONAR EM CASOS ASYNCRONOS COM FIND
     // cy.get('#lista li')
     //   .find('span')
     //   .should('contain', 'Item 1');
@@ -34,6 +35,8 @@ describe('Async', () => {
     // .find('span')
     // .should('contain', 'Item 2');
 
+    // A MELHOR FORMA SERIA SELECIONAR tudo e ver se contem oq vc precisa, para mais infos no markdown do cypress
+    // eu explico melhor sobre busque por: "Find Solo E Find Com Async (Com async não é interessante vou explicar o pq)"
     cy.get('#lista li span', { timeout: 6000 })
       .should('contain', 'Item 2');
   });
