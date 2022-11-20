@@ -7,7 +7,8 @@ describe('Cypress basics', () => {
   });
 
   it('should visit a page and assert a title', () => {
-    cy.pause();
+    cy.title()
+      .then(t => console.log(t));
     cy.title()
       .should('be.equal', 'Campo de Treinamento')
       .and('contains', 'Campo');

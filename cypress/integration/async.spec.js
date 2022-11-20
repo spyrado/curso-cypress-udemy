@@ -25,7 +25,7 @@ describe('Async', () => {
       .should('exist');
   });
 
-  it.only('Find', () => {
+  it('Find', () => {
     cy.get('#buttonList').click();
     //FORMA ERRADA, NÃO VAI FUNCIONAR EM CASOS ASYNCRONOS COM FIND
     // cy.get('#lista li')
@@ -39,5 +39,32 @@ describe('Async', () => {
     // eu explico melhor sobre busque por: "Find Solo E Find Com Async (Com async não é interessante vou explicar o pq)"
     cy.get('#lista li span', { timeout: 6000 })
       .should('contain', 'Item 2');
+  });
+
+  it('Uso do timeout', () => {
+    cy.get('#buttonListDOM').click();
+    cy.get('#lista li span', { timeout: 6000 })
+      .should('contain', 'Item 2');
+  });
+
+  it.only('Click não tem retry', () => {
+    cy.get('#buttonCount')
+      .click()
+      .should('have.value', '11'); // se eu colocar 111 aqui o click não vai ficar clicando até que atenda a condição
+
+  });
+
+  it.only('Then vs Should', () => {
+    cy.get('#buttonListDOM').click();
+    cy.get('#buttonListDOM').then($el => {
+      console.log($el);
+      // expect($el).to.have.length(1);
+    })
+    .and('have.id', 'buttonListDOM')
+
+    // cy.get('#lista li span').should($el => {
+    //   console.log($el);
+    //   expect($el).to.have.length(2);
+    // });
   });
 });
