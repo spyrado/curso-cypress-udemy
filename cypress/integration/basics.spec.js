@@ -7,12 +7,22 @@ describe('Cypress basics', () => {
   });
 
   it('should visit a page and assert a title', () => {
+    let syncTitle = '';
+
     cy.title()
-      .then(t => console.log(t));
+      .then(title => {
+        console.log(title);
+        cy.get('[data-cy=dataSobrenome]').type(title);
+        syncTitle = title;
+      });
+
+    // Como é asyncrono o comando acima devemos utilizar sempre o CYPRESS 
+
     cy.title()
       .should('be.equal', 'Campo de Treinamento')
       .and('contains', 'Campo');
-      // .and('contains', 'Campo');
+      
+    
   });
 
   it('should click on button and assert the text', () => {
