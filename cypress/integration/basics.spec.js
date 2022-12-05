@@ -16,6 +16,18 @@ describe('Cypress basics', () => {
         syncTitle = title;
       });
 
+    // preciso usar o then do cypress para utilizar o syncTitle, explico o pq na documentação cypress.md
+    // de titulo: #3 Exemplo de uso de promises com async do js vs async do cypress
+    cy.get('#formNome').then($el => {
+      // não é muito bom digitar direto com jquery pq perdemos a rastreabilidade no exemplo abaixo eu fiz com cypress
+      $el.val(syncTitle);
+    });
+
+    cy.get('#elementosForm\\:sugestoes')
+      .then($el => {
+        cy.wrap($el).type(syncTitle);
+      });
+
     // Como é asyncrono o comando acima devemos utilizar sempre o CYPRESS 
 
     cy.title()
